@@ -38,7 +38,7 @@ The [proxy package](./proxy) does the heavy lifting.  It creates an in-process g
 
 The top level directory includes a sample client that uses the proxy in [main.go](./main.go).
 
-A sample server is included in [server.go](./server.go)
+A sample server is included in [server](./server)
 
 
 ## Inspired by
