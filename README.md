@@ -22,7 +22,7 @@ Why transcode grpc to JSON+HTTP/1.1 just to transcode it back?  As stated above,
 
 ### General Flow
 
-*A new proxy is created and started.
+* A new proxy is created and started.
 * A [client connection](https://godoc.org/google.golang.org/grpc#ClientConn) is created by the proxy.  The proxy sets [ForceCodec](https://godoc.org/google.golang.org/grpc#ForceCodec) on the connection to [JSONPb](https://godoc.org/github.com/grpc-ecosystem/grpc-gateway/runtime#JSONPb) which is the same codec used by [grpc-gateway](https://github.com/grpc-ecosystem/grpc-gateway) to transcode JSON<->protobuf.
 * A grpc client is created using the client connection.  This example uses the [hello world client](https://github.com/grpc/grpc-go/tree/master/examples/helloworld/greeter_client).
 * The client connection uses a [net.Pipe](https://golang.org/pkg/net/#Pipe) to copy requests to the grpc server in the proxy.
@@ -38,7 +38,7 @@ The [proxy package](./proxy) does the heavy lifting.  It creates an in-process g
 
 The top level directory includes a sample client that uses the proxy in [main.go](./main.go).
 
-A sample server is included in [./server](server.go)
+A sample server is included in [server.go](./server.go)
 
 
 ## Inspired by
