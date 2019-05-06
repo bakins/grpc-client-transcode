@@ -143,7 +143,6 @@ func (p *Proxy) streamHandler(srv interface{}, stream grpc.ServerStream) error {
 	defer resp.Body.Close()
 
 	if resp.StatusCode != http.StatusOK {
-		data, err := ioutil.ReadAll(resp.Body)
 		return status.Errorf(codes.Internal, "unexpected HTTP status: %d", resp.StatusCode)
 	}
 
