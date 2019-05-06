@@ -4,7 +4,6 @@ import (
 	"bufio"
 	"bytes"
 	"context"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"net"
@@ -121,7 +120,6 @@ func (p *Proxy) streamHandler(srv interface{}, stream grpc.ServerStream) error {
 	if ok {
 		for k, v := range md {
 			if shouldSkipHeader(k) {
-				fmt.Println("skipping", k)
 				continue
 			}
 			k = strings.TrimPrefix(k, ":")
@@ -134,11 +132,6 @@ func (p *Proxy) streamHandler(srv interface{}, stream grpc.ServerStream) error {
 	req.Header.Set("Content-Type", "application/json")
 	req.Header.Set("Accept", "application/json")
 
-	for k, v := range req.Header {
-		for _, val := range v {
-			fmt.Println(k, val)
-		}
-	}
 	req = req.WithContext(clientCtx)
 
 	resp, err := p.http.Do(req)
@@ -151,9 +144,6 @@ func (p *Proxy) streamHandler(srv interface{}, stream grpc.ServerStream) error {
 
 	if resp.StatusCode != http.StatusOK {
 		data, err := ioutil.ReadAll(resp.Body)
-		if err == nil {
-			fmt.Println(string(data))
-		}
 		return status.Errorf(codes.Internal, "unexpected HTTP status: %d", resp.StatusCode)
 	}
 

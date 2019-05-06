@@ -43,7 +43,6 @@ type frame struct {
 func (c *rawCodec) Marshal(v interface{}) ([]byte, error) {
 	out, ok := v.(*frame)
 	if !ok {
-		fmt.Println("calling Marshal")
 		return c.parentCodec.Marshal(v)
 	}
 	return out.payload, nil
@@ -53,7 +52,6 @@ func (c *rawCodec) Marshal(v interface{}) ([]byte, error) {
 func (c *rawCodec) Unmarshal(data []byte, v interface{}) error {
 	dst, ok := v.(*frame)
 	if !ok {
-		fmt.Println("calling Unmarshal")
 		return c.parentCodec.Unmarshal(data, v)
 	}
 	dst.payload = data
